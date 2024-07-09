@@ -4,6 +4,7 @@ const Partner = require('../models/partner');
 const jwt = require('jsonwebtoken');
 const { validationResult } = require('express-validator');
 
+
 exports.signup = async (req, res) => {
     try {
         const errors = validationResult(req);
@@ -56,7 +57,6 @@ exports.login = async (req, res) => {
         jwt.sign(
             payload,
             process.env.JWT_SECRET,
-            { expiresIn: '1h' },
             (err, token) => {
                 if (err) throw err;
                 res.json({ msg: 'Login successful', token });
@@ -117,7 +117,7 @@ exports.getAllProfiles = async (req, res) => {
     }
 };
 
-
+// Delete partner profile
 // Delete partner profile
 exports.deleteProfile = async (req, res) => {
     try {
