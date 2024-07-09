@@ -1,3 +1,56 @@
+# Salon Management API
+
+This project is a Salon Management API built using Node.js, Express.js, and MySQL. It provides endpoints for managing customers, partners, salons, services, staff, bookings, and admin operations.
+
+## Table of Contents
+
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [API Endpoints](#api-endpoints)
+  - [Customer Endpoints](#customer-endpoints)
+  - [Partner Endpoints](#partner-endpoints)
+  - [Salon Endpoints](#salon-endpoints)
+  - [Service Endpoints](#service-endpoints)
+  - [Staff Endpoints](#staff-endpoints)
+  - [Booking Endpoints](#booking-endpoints)
+  - [Admin Endpoints](#admin-endpoints)
+- [Testing with Postman](#testing-with-postman)
+- [Contributing](#contributing)
+- [License](#license)
+
+## Features
+
+- Customer and partner registration and login
+- Manage salon details, services, and staff
+- Book and manage appointments
+- Admin operations to manage users, partners, and salons
+
+## Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/AshishJadhav45/SalonApp-API.git
+   cd SalonApp-API
+   npm install
+Create a .env file in the root directory and add the following
+PORT=3000
+DB_HOST=your_database_host
+DB_USER=your_database_user
+DB_PASSWORD=your_database_password
+DB_NAME=your_database_name
+JWT_SECRET=your_jwt_secret
+
+Start the server:
+npm start
+
+
+
+
+
+
+
 ##### Salon App Api Endpoints #####
 
 
