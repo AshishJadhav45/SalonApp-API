@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const multer = require('multer');
 const { body } = require('express-validator');
 const salonController = require('../controllers/salonController');
 const authMiddleware = require('../middleware/authMiddleware');
@@ -12,20 +13,48 @@ const salonValidation = [
     body('state', 'State is required').notEmpty(),
     body('country', 'Country is required').notEmpty(),
     body('zipCode', 'Zip code is required').notEmpty(),
-    body('salonImage', 'image is required').notEmpty()
-
+    body('ShopActLicense', 'Shop Act License is required').notEmpty(),
+    body('gst', 'GST number is required').notEmpty(),
+    body('partnerEmail', 'Partner email is required').isEmail(), // Validate partner's email
 ];
 
-// Protect routes below with authentication middleware
-router.use(authMiddleware);
+
+const editSalonValidation = [
+    body('name').optional().notEmpty().withMessage('Name is required'),
+    body('address').optional().notEmpty().withMessage('Address is required'),
+    body('city').optional().notEmpty().withMessage('City is required'),
+    body('state').optional().notEmpty().withMessage('State is required'),
+    body('country').optional().notEmpty().withMessage('Country is required'),
+    body('zipCode').optional().notEmpty().withMessage('Zip code is required')
+];
+
+// Multer setup for handling file uploads
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'uploads/salon'); // Specify the directory where files should be uploaded
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.fieldname + '-' + Date.now() + '.' + file.originalname.split('.').pop());
+    }
+});
+const upload = multer({ storage: storage });
+
+
+
+
+
 
 // Add a new salon
-router.post('/add', salonValidation, salonController.addSalon);
+router.post('/add', authMiddleware, upload.array('images', 8), salonValidation, salonController.addSalon);
+router.put('/:id/edit', editSalonValidation, salonController.editSalon);
 
-// Update salon details
-router.put('/:id/edit',  salonController.editSalon);
+router.get('/email/:email', salonController.getSalonByEmail);
 
-// Get salon details by ID
-router.get('/:id', salonController.getSalonById);
+
+
+
+
+
+
 
 module.exports = router;

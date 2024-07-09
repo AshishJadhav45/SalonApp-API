@@ -1,7 +1,9 @@
+// routes/serviceRoutes.js
+
 const express = require('express');
 const router = express.Router();
 const { body } = require('express-validator');
-const salonServiceController = require('../controllers/salonServiceController');
+const serviceController = require('../controllers/serviceController');
 const authMiddleware = require('../middleware/authMiddleware');
 
 // Validate request body for adding a new service
@@ -12,12 +14,13 @@ const addServiceValidation = [
 ];
 
 // Protect routes below with authentication middleware
-router.use(authMiddleware);
+// router.use(authMiddleware);
 
 // Salon service routes
-router.get('/:id/services', salonServiceController.getAllServices);
-router.post('/:id/services', addServiceValidation, salonServiceController.addService);
-router.put('/:id/services/:serviceId', addServiceValidation, salonServiceController.updateService);
-router.delete('/:id/services/:serviceId', salonServiceController.deleteService);
+router.get('/:id/services', serviceController.getAllServices);
+router.post('/:id/services', addServiceValidation, serviceController.addService);
+router.put('/:id/services/:serviceId', serviceController.updateService);
+router.delete('/:id/services/:serviceId', serviceController.deleteService);
+router.get('/all', serviceController.getAllServices);
 
 module.exports = router;

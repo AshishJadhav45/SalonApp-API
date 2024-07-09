@@ -5,6 +5,10 @@ const router = express.Router();
 const { body } = require('express-validator');
 const authMiddleware = require('../middleware/authMiddleware');
 const partnerController = require('../controllers/partnerController');
+const bookingController = require('../controllers/bookingController')
+
+
+
 
 
 
@@ -26,6 +30,7 @@ router.post('/signup', signupValidation, partnerController.signup);
 // Authenticate a partner
 router.post('/login', partnerController.login);
 
+
 // Protect routes below with authentication middleware
 router.use(authMiddleware);
 
@@ -40,6 +45,14 @@ router.delete('/profile', partnerController.deleteProfile);
 
 // Route to fetch all partner profiles
 router.get('/profiles', partnerController.getAllProfiles);
+
+
+
+router.put('/bookings/:bookingId/confirm', bookingController.confirmBooking);
+
+router.get('/bookings', bookingController.getSalonBookings);
+
+
 
 
 
