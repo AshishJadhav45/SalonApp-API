@@ -1,29 +1,22 @@
-// models/staff.js
-
 const db = require('../config/db');
 
 const Staff = {
-  create: async function (salonId, name, position) {
+  addStaff: async function (salonId, name, position) {
     const [result] = await db.execute('INSERT INTO staff (salonId, name, position) VALUES (?, ?, ?)', [salonId, name, position]);
     return result.insertId;
   },
 
-  updateById: async function (id, name, position) {
+  updateStaff: async function (id, name, position) {
     await db.execute('UPDATE staff SET name = ?, position = ? WHERE id = ?', [name, position, id]);
   },
 
-  deleteById: async function (id) {
+  deleteStaff: async function (id) {
     await db.execute('DELETE FROM staff WHERE id = ?', [id]);
   },
 
   getAllBySalonId: async function (salonId) {
     const [staff] = await db.execute('SELECT * FROM staff WHERE salonId = ?', [salonId]);
     return staff;
-  },
-
-  getById: async function (id) {
-    const [staff] = await db.execute('SELECT * FROM staff WHERE id = ?', [id]);
-    return staff[0];
   },
 };
 

@@ -35,7 +35,9 @@ const Partner = {
             console.error('Error fetching partner profiles:', err);
             throw new Error('Error fetching partner profiles');
         }
-    }
+    },
+
+    
 };
 
 module.exports = Partner;
