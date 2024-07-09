@@ -1,3 +1,4 @@
+
 const jwt = require('jsonwebtoken');
 
 // Middleware function for authenticating user tokens
@@ -31,3 +32,4 @@ module.exports = (req, res, next) => {
         res.status(401).json({ msg: 'Token is not valid' });
     }
 };
+
